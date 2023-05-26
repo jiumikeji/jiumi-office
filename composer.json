@@ -6,7 +6,7 @@
         "jiumiadmin",
         "office"
     ],
-    "description": "jiumiadmin office package",
+    "description": "九米电子科技有限公司",
     "autoload": {
         "psr-4": {
             "Jiumi\\Office\\": "src/"
