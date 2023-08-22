@@ -8,30 +8,30 @@ declare(strict_types=1);
  * @Copyright：Copyright (c) 2022 - 2035, 河北九米电子科技有限公司, Inc.
  */
 
-namespace Jiumi\Office\Excel;
+namespace Jiiumi\Office\Excel;
 
-use Jiumi\Exception\JiumiException;
-use Jiumi\Office\ExcelPropertyInterface;
-use Jiumi\Office\JiumiExcel;
+use Jiiumi\Exception\JiiumiException;
+use Jiiumi\Office\ExcelPropertyInterface;
+use Jiiumi\Office\JiiumiExcel;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 
-class PhpOffice extends JiumiExcel implements ExcelPropertyInterface
+class PhpOffice extends JiiumiExcel implements ExcelPropertyInterface
 {
 
     /**
      * 导入
-     * @param \Jiumi\JiumiModel $model
+     * @param \Jiiumi\JiiumiModel $model
      * @param \Closure|null $closure
      * @return bool
      * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function import(\Jiumi\JiumiModel $model, ?\Closure $closure = null): bool
+    public function import(\Jiiumi\JiiumiModel $model, ?\Closure $closure = null): bool
     {
-        $request = container()->get(\Jiumi\JiumiRequest::class);
+        $request = container()->get(\Jiiumi\JiiumiRequest::class);
         $data = [];
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -58,7 +58,7 @@ class PhpOffice extends JiumiExcel implements ExcelPropertyInterface
                 unlink($tempFilePath);
             } catch (\Throwable $e) {
                 unlink($tempFilePath);
-                throw new JiumiException($e->getMessage());
+                throw new JiiumiException($e->getMessage());
             }
         } else {
             return false;

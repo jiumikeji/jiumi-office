@@ -8,17 +8,17 @@ declare(strict_types=1);
  * @Copyright：Copyright (c) 2022 - 2035, 河北九米电子科技有限公司, Inc.
  */
 
-namespace Jiumi\Office\Excel;
+namespace Jiiumi\Office\Excel;
 
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use MathPHP\Probability\Distribution\Continuous\F;
-use Jiumi\Exception\JiumiException;
-use Jiumi\JiumiResponse;
-use Jiumi\Office\ExcelPropertyInterface;
-use Jiumi\Office\JiumiExcel;
+use Jiiumi\Exception\JiiumiException;
+use Jiiumi\JiiumiResponse;
+use Jiiumi\Office\ExcelPropertyInterface;
+use Jiiumi\Office\JiiumiExcel;
 use Vtiful\Kernel\Format;
 
-class XlsWriter extends JiumiExcel implements ExcelPropertyInterface
+class XlsWriter extends JiiumiExcel implements ExcelPropertyInterface
 {
     public static function getSheetData(mixed $request)
     {
@@ -32,16 +32,16 @@ class XlsWriter extends JiumiExcel implements ExcelPropertyInterface
 
     /**
      * 导入数据
-     * @param \Jiumi\JiumiModel $model
+     * @param \Jiiumi\JiiumiModel $model
      * @param \Closure|null $closure
      * @return bool
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      * @throws \Exception
      */
-    public function import(\Jiumi\JiumiModel $model, ?\Closure $closure = null): bool
+    public function import(\Jiiumi\JiiumiModel $model, ?\Closure $closure = null): bool
     {
-        $request = container()->get(\Jiumi\JiumiRequest::class);
+        $request = container()->get(\Jiiumi\JiiumiRequest::class);
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $tempFileName = 'import_'.time().'.'.$file->getExtension();
@@ -162,14 +162,14 @@ class XlsWriter extends JiumiExcel implements ExcelPropertyInterface
             $exportData[] = $yield;
         }
 
-        $response = container()->get(JiumiResponse::class);
+        $response = container()->get(JiiumiResponse::class);
         $filePath = $fileObject->data($exportData)->output();
 
         $response->download($filePath, $filename);
 
         ob_start();
         if ( copy($filePath, 'php://output') === false) {
-            throw new JiumiException('导出数据失败',  500);
+            throw new JiiumiException('导出数据失败',  500);
         }
         $res = $this->downloadExcel($filename, ob_get_contents());
         ob_end_clean();

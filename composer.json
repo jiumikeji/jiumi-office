@@ -1,12 +1,12 @@
 {
-    "name": "jiumikeji/jiumi-office",
+    "name": "jiumikeji/jiiumi-office",
     "type": "library",
     "license": "Apache-2.0",
     "keywords": [
-        "jiumiadmin",
-        "office"
+        "九米",
+        "九米-office"
     ],
-    "description": "河北九米电子科技有限框架office包",
+    "description": "河北九米电子科技有限 office package",
     "autoload": {
         "psr-4": {
             "Jiumi\\Office\\": "src/"

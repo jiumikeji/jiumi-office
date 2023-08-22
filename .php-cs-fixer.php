@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 $header = <<<'EOF'
 
-    * JiumiAdmin is committed to providing solutions for quickly building web applications
+    * JiiumiAdmin is committed to providing solutions for quickly building web applications
     * Please view the LICENSE file that was distributed with this source code,
     * For the full copyright and license information.
-    * Thank you very much for using JiumiAdmin.
+    * Thank you very much for using JiiumiAdmin.
 
     * @Author X.Mo <root@imoi.cn>
-    * @Link   https://www.jiumiadmin.com/
+    * @Link   https://www.jiiumiadmin.com/
     * @Github  https://github.com/kanyjiumikeji
-    * @Document https://doc.jiumiadmin.com/
+    * @Document https://doc.jiiumiadmin.com/
 
     EOF;
 

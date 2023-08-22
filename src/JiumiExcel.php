@@ -8,20 +8,20 @@ declare(strict_types=1);
  * @Copyright：Copyright (c) 2022 - 2035, 河北九米电子科技有限公司, Inc.
  */
 
-namespace Jiumi\Office;
+namespace Jiiumi\Office;
 
 use App\System\Service\SystemDictDataService;
 use Hyperf\Di\Annotation\AnnotationCollector;
 use Hyperf\HttpMessage\Stream\SwooleStream;
-use Jiumi\Exception\JiumiException;
-use Jiumi\Interfaces\JiumiModelExcel;
-use Jiumi\JiumiResponse;
+use Jiiumi\Exception\JiiumiException;
+use Jiiumi\Interfaces\JiiumiModelExcel;
+use Jiiumi\JiiumiResponse;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-abstract class JiumiExcel
+abstract class JiiumiExcel
 {
-    public const ANNOTATION_NAME = 'Jiumi\Annotation\ExcelProperty';
+    public const ANNOTATION_NAME = 'Jiiumi\Annotation\ExcelProperty';
 
     /**
      * @var array|null
@@ -37,12 +37,12 @@ abstract class JiumiExcel
 
     /**
      * @param String $dto
-     * @param JiumiModel $model
+     * @param JiiumiModel $model
      */
     public function __construct(string $dto)
     {
-        if (!(new $dto) instanceof JiumiModelExcel) {
-            throw new JiumiException('dto does not implement an interface of the JiumiModelExcel', 500);
+        if (!(new $dto) instanceof JiiumiModelExcel) {
+            throw new JiiumiException('dto does not implement an interface of the JiiumiModelExcel', 500);
         }
         $dtoObject = new $dto();
         if (method_exists($dtoObject, 'dictData')) {
@@ -77,7 +77,7 @@ abstract class JiumiExcel
     protected function parseProperty(): void
     {
         if (empty($this->annotationMate) || !isset($this->annotationMate['_c'])) {
-            throw new JiumiException('dto annotation info is empty', 500);
+            throw new JiiumiException('dto annotation info is empty', 500);
         }
 
         foreach ($this->annotationMate['_p'] as $name => $mate) {
@@ -108,8 +108,8 @@ abstract class JiumiExcel
      */
     protected function downloadExcel(string $filename, string $content): \Psr\Http\Message\ResponseInterface
     {
-        return container()->get(JiumiResponse::class)->getResponse()
-            ->withHeader('Server', 'JiumiAdmin')
+        return container()->get(JiiumiResponse::class)->getResponse()
+            ->withHeader('Server', 'JiiumiAdmin')
             ->withHeader('content-description', 'File Transfer')
             ->withHeader('content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
             ->withHeader('content-disposition', "attachment; filename={$filename}; filename*=UTF-8''" . rawurlencode($filename))
@@ -146,9 +146,9 @@ abstract class JiumiExcel
         if ($columnIndex < 26) {
             return chr(65 + $columnIndex);
         } else if ($columnIndex < 702) {
-            return chr(64 + ($columnIndex / 26)) . chr(65 + $columnIndex % 26);
+            return chr(64 + intval($columnIndex / 26)) . chr(65 + $columnIndex % 26);
         } else {
-            return chr(64 + (($columnIndex - 26) / 676)) . chr(65 + ((($columnIndex - 26) % 676) / 26)) . chr(65 + $columnIndex % 26);
+            return chr(64 + intval(($columnIndex - 26) / 676)) . chr(65 + intval((($columnIndex - 26) % 676) / 26)) . chr(65 + $columnIndex % 26);
         }
     }
 }

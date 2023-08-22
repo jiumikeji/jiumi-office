@@ -8,11 +8,11 @@ declare(strict_types=1);
  * @Copyright：Copyright (c) 2022 - 2035, 河北九米电子科技有限公司, Inc.
  */
 
-namespace Jiumi\Office;
+namespace Jiiumi\Office;
 
 interface ExcelPropertyInterface
 {
-    public function import(\Jiumi\JiumiModel $model, ?\Closure $closure = null): bool;
+    public function import(\Jiiumi\JiiumiModel $model, ?\Closure $closure = null): bool;
 
     public function export(string $filename, array|\Closure $closure): \Psr\Http\Message\ResponseInterface;
 }
